@@ -8,14 +8,14 @@ screen = pygame.display.set_mode((1920, 1080))
 pygame.display.set_caption("Pygame Example")
 
 # Load image
-morning = pygame.image.load("PinkMorning.png")
-day = pygame.image.load("BlueDay.png")
-noon = pygame.image.load("OrangeSunset.png")
-night = pygame.image.load("MarineblueNight.png")
+morning = pygame.image.load("../Assets/Backgrounds/PinkMorning.png")
+day = pygame.image.load("../Assets/Backgrounds/BlueDay.png")
+noon = pygame.image.load("../Assets/Backgrounds/OrangeSunset.png")
+night = pygame.image.load("../Assets/Backgrounds/MarineblueNight.png")
 
-house = pygame.image.load("HomeTest1.png")
-garage = pygame.image.load("GarageDoor.png")
-phone = pygame.image.load("Phone.png")
+house = pygame.image.load("../Assets/HomeTest1.png")
+garage = pygame.image.load("../Assets/Smart_Devices/GarageDoor.png")
+phone = pygame.image.load("../Assets/Phone.png")
 
 resized_phone = pygame.transform.scale(phone, (532, 1001))
 
