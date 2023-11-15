@@ -5,14 +5,15 @@ pygame.init()
 
 # Set up display
 screen = pygame.display.set_mode((1920, 1080))
-pygame.display.set_caption("Pygame Example")
+pygame.display.set_caption("Smart Home Simulation")
 
-# Load image
+# Load background images
 morning = pygame.image.load("../Assets/Backgrounds/PinkMorning.png")
 day = pygame.image.load("../Assets/Backgrounds/BlueDay.png")
 noon = pygame.image.load("../Assets/Backgrounds/OrangeSunset.png")
 night = pygame.image.load("../Assets/Backgrounds/MarineblueNight.png")
 
+# Load Assets
 house = pygame.image.load("../Assets/HomeTest1.png")
 garage = pygame.image.load("../Assets/Smart_Devices/GarageDoor.png")
 phone = pygame.image.load("../Assets/Phone.png")
@@ -27,9 +28,11 @@ night_duration = 1
 
 total_cycle_duration = morning_duration + day_duration + noon_duration + night_duration
 
+# Clock
 clock = pygame.time.Clock()
 current_time = 0
-# Normalize menu position
+
+# Visibility of the smart home app
 visible = False
 
 # Main game loop
@@ -56,12 +59,12 @@ while True:
 
     screen.fill((0, 0, 0))
 
-    # Draw image on the screen
+    # Draw images on the screen
     screen.blit(current_background, (0, 0))
     screen.blit(house, (0, 0))
     screen.blit(garage, (0, 0))
 
-    #menu_content.set_alpha(200)  # Set transparency (adjust as needed)
+    # menu_content.set_alpha(200)  # Set transparency (adjust as needed)
     if visible:
         #screen.blit(menu_content, (0, 0))
         screen.blit(resized_phone, (1351, 42))
