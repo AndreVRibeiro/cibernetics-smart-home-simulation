@@ -1,27 +1,44 @@
 import pygame
 
 
+class Button:
+    def __init__(self, text, action, image, position):
+        self.text = text
+        self.action = action
+        self.image = pygame.transform.scale(pygame.image.load(image), (135, 93))
+        self.position = position
+        self.rect = self.image.get_rect(topleft=position)
+
+    def perform_action(self):
+        print(f"Button clicked: {self.text}")
+        # Add your button action logic here
+
+
 class SmartApp:
 
     def __init__(self, image_filename):
-        i = pygame.image.load(image_filename)
-        self.image = pygame.transform.scale(i, (532, 1001))
+        self.image = pygame.transform.scale(pygame.image.load(image_filename), (532, 1001))
         self.visible = False
+        self.buttons = [
+            Button("Button 1", 1, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/button.png", (1410, 200))
+            # Add more buttons as needed
+
+        ]
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            SmartApp.visibility(self)
-
-        '''if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left mouse button
-            if self.button_visible:
-                button_rect = self.button.get_rect(topleft=self.position)
-                if button_rect.collidepoint(event.pos):
-                    print("Button Clicked!")
-                    # Add your button click logic here'''
+            self.visibility()
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left mouse button
+            if self.visible:
+                for button in self.buttons:
+                    if button.rect.collidepoint(event.pos):
+                        button.perform_action()
 
     def draw(self, screen):
         if self.visible:
             screen.blit(self.image, (1351, 42))  # Draw the image
+            for button in self.buttons:
+                screen.blit(button.image, button.position)
 
     def visibility(self):
         self.visible = not self.visible
