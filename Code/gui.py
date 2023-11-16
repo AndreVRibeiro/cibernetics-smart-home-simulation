@@ -1,6 +1,8 @@
 import pygame
 import sys
 
+from Code.smart_app import SmartApp
+
 pygame.init()
 
 # Set up display
@@ -8,17 +10,16 @@ screen = pygame.display.set_mode((1920, 1080))
 pygame.display.set_caption("Smart Home Simulation")
 
 # Load background images
-morning = pygame.image.load("../Assets/Backgrounds/PinkMorning.png")
-day = pygame.image.load("../Assets/Backgrounds/BlueDay.png")
-noon = pygame.image.load("../Assets/Backgrounds/OrangeSunset.png")
-night = pygame.image.load("../Assets/Backgrounds/MarineblueNight.png")
+morning = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/PinkMorning.png")
+day = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/BlueDay.png")
+noon = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/OrangeSunset.png")
+night = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/MarineblueNight.png")
 
 # Load Assets
-house = pygame.image.load("../Assets/HomeTest1.png")
-garage = pygame.image.load("../Assets/Smart_Devices/GarageDoor.png")
-phone = pygame.image.load("../Assets/Phone.png")
+house = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/HomeTest1.png")
+garage = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/GarageDoor.png")
 
-resized_phone = pygame.transform.scale(phone, (532, 1001))
+smart_app = SmartApp("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Phone.png")
 
 # Define time intervals (in seconds) for each background
 morning_duration = 1
@@ -42,8 +43,7 @@ while True:
             pygame.quit()
             sys.exit()
 
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            visible = not visible
+        smart_app.handle_event(event)
 
     current_time = (current_time + clock.tick(60) / 1000) % total_cycle_duration  # Convert milliseconds to seconds
 
@@ -65,10 +65,7 @@ while True:
     screen.blit(garage, (0, 0))
 
     # menu_content.set_alpha(200)  # Set transparency (adjust as needed)
-    if visible:
-        #screen.blit(menu_content, (0, 0))
-        screen.blit(resized_phone, (1351, 42))
-
+    smart_app.draw(screen)
 
     # Update display
     pygame.display.flip()
