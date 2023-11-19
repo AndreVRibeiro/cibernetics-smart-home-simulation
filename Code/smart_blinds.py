@@ -1,12 +1,17 @@
-class Blinds:
-    def __init__(self):
-        self.closed = False  # Blinds start closed by default
+from Code.smart_device import Device
+
+
+class Blinds(Device):
+    def __init__(self, image):
+        super().__init__(image)
+        self.closed = True  # Blinds start closed by default
 
     # This function opens the blinds and prints the image of an open blind
-    def open(self):
-        self.closed = False
+    def action(self, smart_home):
+        self.closed = not self.closed
 
-    # This function closes the blinds and prints the image of a closed blind
-    def close(self):
-        self.closed = True
+        if self.closed:
+            smart_home.devices.append(self.image)
+        else:
+            smart_home.devices.remove(self.image)
 
