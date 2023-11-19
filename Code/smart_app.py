@@ -5,11 +5,13 @@ from Code.button import Button
 
 class SmartApp:
 
-    def __init__(self, image_filename):
-        self.image = pygame.transform.scale(pygame.image.load(image_filename), (532, 1001))
+    def __init__(self, smart_home):
+        self.image = pygame.transform.scale(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Phone.png"), (532, 1001))
         self.visible = False
+        self.smart_home = smart_home
         self.buttons = [
-            Button("Button 1", 1, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/button.png", (1410, 200))
+            Button("Bedroom Blinds", self.smart_home.blinds_bedroom, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds.png", "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds_pressed.png", (1406.138, 641.480), smart_home),
+            Button("Bathroom Blinds", self.smart_home.blinds_bathroom, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds.png", "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds_pressed.png", (1406.138, 769.791), smart_home)
             # Add more buttons as needed
 
         ]
