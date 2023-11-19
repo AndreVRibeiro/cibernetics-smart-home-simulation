@@ -14,7 +14,8 @@ class SmartHome:
         self.devices.append(self.blinds_bedroom.image)
         self.devices.append(self.blinds_bathroom.image)
 
-        self.ceiling_ligths_bedroom = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bedroom_Ceiling_Lights.png"))
+        self.ceiling_lights_bedroom = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bedroom_Ceiling_Lights.png"))
+        self.ceiling_lights_livingroom = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Livingroom_Ceiling_Lights.png"))
 
 
     def draw(self, screen):

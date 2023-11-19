@@ -13,7 +13,8 @@ class SmartApp:
         self.buttons = [
             Button("Bedroom Blinds", self.smart_home.blinds_bedroom, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds.png", "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds_pressed.png", (1406.138, 641.480), smart_home),
             Button("Bathroom Blinds", self.smart_home.blinds_bathroom, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds.png", "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds_pressed.png", (1406.138, 769.791), smart_home),
-            Button("Bedroom Ceiling Lights", self.smart_home.ceiling_ligths_bedroom, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights.png", "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights_pressed.png", (1549.301, 769.791), smart_home)
+            Button("Bedroom Ceiling Lights", self.smart_home.ceiling_lights_bedroom, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights.png", "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights_pressed.png", (1549.288, 641.480), smart_home),
+            Button("Livingroom Ceiling Lights", self.smart_home.ceiling_lights_livingroom, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights.png", "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights_pressed.png", (1549.301, 384.858), smart_home)
             # Add more buttons as needed
 
         ]
