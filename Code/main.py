@@ -2,6 +2,8 @@ import pygame
 import sys
 
 from Code.smart_app import SmartApp
+from Code.smart_blinds import Blinds
+from Code.smart_home import SmartHome
 
 pygame.init()
 
@@ -15,11 +17,9 @@ day = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cyber
 noon = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/OrangeSunset.png")
 night = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/MarineblueNight.png")
 
-# Load Assets
-house = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/HomeTest1.png")
-garage = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/GarageDoor.png")
-
-smart_app = SmartApp("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Phone.png")
+# Create the smart home and the smart home application
+smart_home = SmartHome()
+smart_app = SmartApp(smart_home)
 
 # Define time intervals (in seconds) for each background
 morning_duration = 1
@@ -32,9 +32,6 @@ total_cycle_duration = morning_duration + day_duration + noon_duration + night_d
 # Clock
 clock = pygame.time.Clock()
 current_time = 0
-
-# Visibility of the smart home app
-visible = False
 
 # Main game loop
 while True:
@@ -61,8 +58,7 @@ while True:
 
     # Draw images on the screen
     screen.blit(current_background, (0, 0))
-    screen.blit(house, (0, 0))
-    screen.blit(garage, (0, 0))
+    smart_home.draw(screen)
 
     # menu_content.set_alpha(200)  # Set transparency (adjust as needed)
     smart_app.draw(screen)
