@@ -1,6 +1,7 @@
 import pygame.image
 
 from Code.smart_blinds import Blinds
+from Code.smart_garage import Garage
 from Code.smart_ligths import Light
 
 
@@ -20,6 +21,10 @@ class SmartHome:
         self.ceiling_lights_livingroom = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Livingroom_Ceiling_Lights.png"))
         self.ceiling_lights_kitchen = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Kitchen_Ceiling_Lights.png"))
         self.lights_bathroom = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bathroom_Lights.png"))
+
+        # Add the Garage Door
+        self.garage_door = Garage(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Garage_Door.png"))
+        self.devices.append(self.garage_door.image)
 
 
     def draw(self, screen):
