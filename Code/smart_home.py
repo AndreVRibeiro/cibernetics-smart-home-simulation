@@ -9,13 +9,17 @@ class SmartHome:
     def __init__(self):
         self.devices = [pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/HomeTest1.png")]
 
+        # Add the Blinds to the Smart House
         self.blinds_bedroom = Blinds(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bedroom_Blinds.png"))
         self.blinds_bathroom = Blinds(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bathroom_Blinds.png"))
         self.devices.append(self.blinds_bedroom.image)
         self.devices.append(self.blinds_bathroom.image)
 
+        # Add the Ceiling Lights to the Smart House
         self.ceiling_lights_bedroom = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bedroom_Ceiling_Lights.png"))
         self.ceiling_lights_livingroom = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Livingroom_Ceiling_Lights.png"))
+        self.ceiling_lights_kitchen = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Kitchen_Ceiling_Lights.png"))
+        self.lights_bathroom = Light(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bathroom_Lights.png"))
 
 
     def draw(self, screen):
