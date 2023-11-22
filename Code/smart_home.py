@@ -26,6 +26,9 @@ class SmartHome:
         self.garage_door = Garage(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Garage_Door.png"))
         self.devices.append(self.garage_door.image)
 
+        # Add the TV
+        #self.television = TV(pygame.image.load())
+
 
     def draw(self, screen):
         for image in self.devices:
