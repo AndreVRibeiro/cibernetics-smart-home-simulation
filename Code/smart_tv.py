@@ -6,7 +6,7 @@ class TV(Device):
         super().__init__(image)
         self.on = False  # TV starts off as default
 
-    # This function opens the blinds and prints the image of an open blind
+    # To be finished
     def action(self, smart_home):
         self.on = not self.on
 
@@ -14,4 +14,3 @@ class TV(Device):
             smart_home.devices.append(self.image)
         else:
             smart_home.devices.remove(self.image)
-
