@@ -1,7 +1,6 @@
 import pygame
 
 from Code.button import Button
-from Code.smart_ligths import Light
 
 
 class SmartApp:
@@ -9,7 +8,8 @@ class SmartApp:
     def __init__(self, smart_home):
         self.image = pygame.transform.scale(pygame.image.load(
             "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Phone.png"), (532, 1001))
-        self.image_Extra = pygame.transform.scale(pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Extra.png"), (479, 792))
+        self.image_Extra = pygame.transform.scale(pygame.image.load(
+            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Extra.png"), (479, 792))
         self.visible_Start = False
         self.visible_Camera = False
         self.smart_home = smart_home

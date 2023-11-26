@@ -45,6 +45,9 @@ class SmartHome:
         # Add the camera
         self.garage_camera = Camera(None)
 
+        # Add array for notifications
+        self.notifications = []
+
     def draw(self, screen):
         for image in self.devices:
             screen.blit(image, (0, 0))
