@@ -56,7 +56,8 @@ class SmartHome:
         self.notifications = [notif for notif in self.notifications if not notif.is_expired()]
 
     def draw_notifications(self, screen):
-        font = pygame.font.Font(pygame.font.match_font('Bahnschrift'), 50)
+        # font = pygame.font.Font(pygame.font.match_font('Bahnschrift'), 50)
+        font = pygame.font.Font(pygame.font.match_font('Segoe UI Emoji'), 50)
         y_position = 50
         background_color = (255, 255, 255)
         for notif in self.notifications:

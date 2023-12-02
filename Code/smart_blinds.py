@@ -17,10 +17,10 @@ class Blinds(Device):
             smart_home.devices.remove(self.image)
 
     def add_notification(self, name, place):
-        if self.closed:
-            text = "The " + name + " opened in the " + place
-            return Notification(text, 3000)
         if not self.closed:
-            text = "The " + name + " closed in the " + place
+            text = "✅ The " + name + " opened in the " + place
+            return Notification(text, 3000)
+        if self.closed:
+            text = "⛔ The " + name + " closed in the " + place
             return Notification(text, 3000)
 
