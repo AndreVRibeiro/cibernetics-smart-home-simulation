@@ -14,43 +14,43 @@ class SmartApp:
         self.visible_Camera = False
         self.smart_home = smart_home
         self.buttons_Start = [
-            Button("Bedroom Blinds", self.smart_home.blinds_bedroom,
+            Button("Blinds", "Bedroom", self.smart_home.blinds_bedroom,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds_pressed.png",
                    (1406.138, 641.480), smart_home),
-            Button("Bathroom Blinds", self.smart_home.blinds_bathroom,
+            Button("Blinds", "Bathroom",  self.smart_home.blinds_bathroom,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_blinds_pressed.png",
                    (1406.138, 769.791), smart_home),
-            Button("Bedroom Ceiling Lights", self.smart_home.ceiling_lights_bedroom,
+            Button("Ceiling Lights", "Bedroom", self.smart_home.ceiling_lights_bedroom,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights_pressed.png",
                    (1549.288, 641.480), smart_home),
-            Button("Livingroom Ceiling Lights", self.smart_home.ceiling_lights_livingroom,
+            Button("Ceiling Lights", "Living Room", self.smart_home.ceiling_lights_livingroom,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights_pressed.png",
                    (1549.301, 384.858), smart_home),
-            Button("Kitchen Ceiling Lights", self.smart_home.ceiling_lights_kitchen,
+            Button("Ceiling Lights", "Kitchen", self.smart_home.ceiling_lights_kitchen,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_ceiling_lights_pressed.png",
                    (1406.148, 513.239), smart_home),
-            Button("Bathroom Lights", self.smart_home.lights_bathroom,
+            Button("Lights", "Bathroom", self.smart_home.lights_bathroom,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_sconces.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_sconces_pressed.png",
                    (1549.301, 769.791), smart_home),
-            Button("Garage Door", self.smart_home.garage_door,
+            Button("Door", "Garage", self.smart_home.garage_door,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_garage.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_garage_pressed.png",
                    (1406.138, 898.102), smart_home),
-            Button("Bedroom Nightstand Lamp", self.smart_home.nightstand_lamp_bedroom,
+            Button("Nightstand Lamp", "Bedroom", self.smart_home.nightstand_lamp_bedroom,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_nightstand.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_nightstand_pressed.png",
                    (1692.465, 641.480), smart_home),
-            Button("Livingroom Floor Lamp", self.smart_home.floor_lamp_livingroom,
+            Button("Floor Lamp", "Living Room", self.smart_home.floor_lamp_livingroom,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_floorlamp.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_floorlamp_pressed.png",
                    (1692.465, 384.858), smart_home),
-            Button("Garage Camera", self.smart_home.garage_camera,
+            Button("Camera", "Garage", self.smart_home.garage_camera,
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_camera.png",
                    "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_camera.png",
                    (1549.301, 898.102), smart_home)
@@ -58,7 +58,7 @@ class SmartApp:
             # Add more buttons as needed
         ]
         self.buttons_Camera = [
-            Button("Exit", None, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_exit.png", None,
+            Button("Exit", None, None, "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Buttons/button_exit.png", None,
                    (1779.693, 246.525), smart_home)
         ]
 
@@ -70,14 +70,14 @@ class SmartApp:
             if self.visible_Start and not self.visible_Camera:
                 for button in self.buttons_Start:
                     if button.rect.collidepoint(event.pos):
-                        if button.text == "Garage Camera":
+                        if button.name == "Camera":
                             self.visibility_camera()
                         else:
                             button.perform_action()
             elif self.visible_Start and self.visible_Camera:
                 for button in self.buttons_Camera:
                     if button.rect.collidepoint(event.pos):
-                        if button.text == "Exit":
+                        if button.name == "Exit":
                             self.visibility_camera()
 
     def draw(self, screen):

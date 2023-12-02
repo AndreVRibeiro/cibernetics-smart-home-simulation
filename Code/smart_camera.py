@@ -5,10 +5,11 @@ class Camera(Device):
     def __init__(self, image):
         super().__init__(image)
 
-
     def action(self, smart_home):
         return
 
+    def add_notification(self, name, place):
+        return
 
 
 

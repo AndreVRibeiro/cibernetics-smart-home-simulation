@@ -1,3 +1,4 @@
+from Code.notifications import Notification
 from Code.smart_device import Device
 
 
@@ -14,4 +15,12 @@ class Blinds(Device):
             smart_home.devices.append(self.image)
         else:
             smart_home.devices.remove(self.image)
+
+    def add_notification(self, name, place):
+        if self.closed:
+            text = "The " + name + " opened in the " + place
+            return Notification(text, 3000)
+        if not self.closed:
+            text = "The " + name + " closed in the " + place
+            return Notification(text, 3000)
 

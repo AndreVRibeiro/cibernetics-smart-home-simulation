@@ -1,11 +1,14 @@
 import pygame
 
+from Code.notifications import Notification
+
 
 class Button:
-    def __init__(self, text, device, image, image_pressed, position, smart_home):
-        self.text = text
+    def __init__(self, name, place, device, image, image_pressed, position, smart_home):
+        self.name = name
+        self.place = place
         self.device = device
-        if self.text == "Exit":
+        if self.name == "Exit":
             self.image = pygame.transform.scale(pygame.image.load(image), (41, 41))
         else:
             self.image = pygame.transform.scale(pygame.image.load(image), (135.474, 70.853))
@@ -16,13 +19,14 @@ class Button:
         self.pressed = False
 
     def perform_action(self):
-        print(f"Button clicked: {self.text}")
+        print(f"Button clicked: {self.name}")
 
         self.device.action(self.smart_home)
-        self.pressed = not self.pressed
+        self.smart_home.notifications.append(self.device.add_notification(self.name, self.place))
         self.pressed_image()
 
     def pressed_image(self):
+        self.pressed = not self.pressed
         save = self.image
         self.image = self.image_pressed
         self.image_pressed = save

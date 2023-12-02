@@ -51,3 +51,28 @@ class SmartHome:
     def draw(self, screen):
         for image in self.devices:
             screen.blit(image, (0, 0))
+
+    def update_notification_array(self):
+        self.notifications = [notif for notif in self.notifications if not notif.is_expired()]
+
+    def draw_notifications(self, screen):
+        font = pygame.font.Font(pygame.font.match_font('Bahnschrift'), 50)
+        y_position = 50
+        background_color = (255, 255, 255)
+        for notif in self.notifications:
+            text_surface = font.render(notif.text, True, (0, 0, 0))
+
+            text_rect = text_surface.get_rect()
+            text_rect.topleft = (200, y_position)
+
+            # Create a background rectangle
+            background_rect = pygame.Rect(text_rect.left, text_rect.top, text_rect.width, text_rect.height)
+            pygame.draw.rect(screen, background_color, background_rect)
+
+            # Blit the background and text onto the screen
+            screen.blit(text_surface, text_rect.topleft)
+
+            #screen.blit(text_surface, (200, y_position))
+            y_position += text_surface.get_height() + 5
+
+

@@ -1,3 +1,4 @@
+from Code.notifications import Notification
 from Code.smart_device import Device
 
 
@@ -15,3 +16,10 @@ class Garage(Device):
         else:
             smart_home.devices.remove(self.image)
 
+    def add_notification(self, name, place):
+        if self.closed:
+            text = "The Garage Door opened"
+            return Notification(text, 3000)
+        if not self.closed:
+            text = "The Garage Door closed"
+            return Notification(text, 3000)
