@@ -21,9 +21,10 @@ class Button:
     def perform_action(self):
         print(f"Button clicked: {self.name}")
 
-        self.device.action(self.smart_home)
-        self.smart_home.notifications.append(self.device.add_notification(self.name, self.place))
-        self.pressed_image()
+        if self.device is not None:
+            self.device.action(self.smart_home)
+            self.smart_home.notifications.append(self.device.add_notification(self.name, self.place))
+            self.pressed_image()
 
     def pressed_image(self):
         self.pressed = not self.pressed

@@ -1,31 +1,31 @@
 import pygame
 import sys
 
-from Code.smart_app import SmartApp
+from smart_app import SmartApp
 from Code.smart_blinds import Blinds
-from Code.smart_home import SmartHome
+from smart_home import SmartHome
 
 pygame.init()
 
 # Set up display
-screen = pygame.display.set_mode((1920, 1080))
-pygame.display.set_caption("Smart Home Simulation")
+#screen = pygame.display.set_mode((1920, 1080))
+#pygame.display.set_caption("Smart Home Simulation")
 
 # Load background images
-morning = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/PinkMorning.png")
-day = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/BlueDay.png")
-noon = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/OrangeSunset.png")
-night = pygame.image.load("C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Backgrounds/MarineblueNight.png")
+morning = pygame.image.load("Assets/Backgrounds/PinkMorning.png")
+day = pygame.image.load("Assets/Backgrounds/BlueDay.png")
+noon = pygame.image.load("Assets/Backgrounds/OrangeSunset.png")
+night = pygame.image.load("Assets/Backgrounds/MarineblueNight.png")
 
 # Create the smart home and the smart home application
 smart_home = SmartHome()
 smart_app = SmartApp(smart_home)
 
 # Define time intervals (in seconds) for each background
-morning_duration = 1
-day_duration = 1
-noon_duration = 1
-night_duration = 1
+morning_duration = 2.5
+day_duration = 2.5
+noon_duration = 2.5
+night_duration = 2.5
 
 total_cycle_duration = morning_duration + day_duration + noon_duration + night_duration
 
@@ -33,12 +33,31 @@ total_cycle_duration = morning_duration + day_duration + noon_duration + night_d
 clock = pygame.time.Clock()
 current_time = 0
 
+# Screen Display
+screen_width, screen_height = 1920, 1080
+fullscreen = False
+screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)  # Make the window resizable
+pygame.display.set_caption("Smart Home Simulation")
+
 # Main game loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.VIDEORESIZE:
+            screen = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)  # Update the screen size
+            screen_width, screen_height = event.w, event.h
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_f:
+            # Toggle fullscreen on 'f' key press
+            fullscreen = not fullscreen
+            if fullscreen:
+                screen = pygame.display.set_mode((screen_width, screen_height), pygame.FULLSCREEN)
+            else:
+                screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
 
         smart_app.handle_event(event)
 

@@ -1,49 +1,44 @@
 import pygame.image
 
-from Code.smart_blinds import Blinds
-from Code.smart_garage import Garage
-from Code.smart_ligths import Light
-from Code.smart_camera import Camera
+from automation_tab import Tab
+from smart_tv import TV
+from smart_blinds import Blinds
+from smart_garage import Garage
+from smart_ligths import Light
+from smart_camera import Camera
 
 
 class SmartHome:
 
     def __init__(self):
-        self.devices = [pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/HomeTest1.png")]
+        self.devices = [pygame.image.load("Assets/HomeTest1.png")]
 
         # Add the Blinds to the Smart House
-        self.blinds_bedroom = Blinds(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bedroom_Blinds.png"))
-        self.blinds_bathroom = Blinds(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bathroom_Blinds.png"))
+        self.blinds_bedroom = Blinds(pygame.image.load("Assets/Smart_Devices/Bedroom_Blinds.png"))
+        self.blinds_bathroom = Blinds(pygame.image.load("Assets/Smart_Devices/Bathroom_Blinds.png"))
         self.devices.append(self.blinds_bedroom.image)
         self.devices.append(self.blinds_bathroom.image)
 
         # Add the Ceiling Lights to the Smart House
-        self.ceiling_lights_bedroom = Light(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bedroom_Ceiling_Lights.png"))
-        self.nightstand_lamp_bedroom = Light(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bedroom_Light.png"))
-        self.ceiling_lights_livingroom = Light(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Livingroom_Ceiling_Lights.png"))
-        self.floor_lamp_livingroom = Light(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Livingroom_Lamp.png"))
-        self.ceiling_lights_kitchen = Light(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Kitchen_Ceiling_Lights.png"))
-        self.lights_bathroom = Light(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Bathroom_Lights.png"))
+        self.ceiling_lights_bedroom = Light(pygame.image.load("Assets/Smart_Devices/Bedroom_Ceiling_Lights.png"))
+        self.nightstand_lamp_bedroom = Light(pygame.image.load("Assets/Smart_Devices/Bedroom_Light.png"))
+        self.ceiling_lights_livingroom = Light(pygame.image.load("Assets/Smart_Devices/Livingroom_Ceiling_Lights.png"))
+        self.floor_lamp_livingroom = Light(pygame.image.load("Assets/Smart_Devices/Livingroom_Lamp.png"))
+        self.ceiling_lights_kitchen = Light(pygame.image.load("Assets/Smart_Devices/Kitchen_Ceiling_Lights.png"))
+        self.lights_bathroom = Light(pygame.image.load("Assets/Smart_Devices/Bathroom_Lights.png"))
 
         # Add the Garage Door
-        self.garage_door = Garage(pygame.image.load(
-            "C:/Uni Basel/Mdl. Applications and Related Topics/Cybernetics/Cybernetic/Assets/Smart_Devices/Garage_Door.png"))
+        self.garage_door = Garage(pygame.image.load("Assets/Smart_Devices/Garage_Door.png"))
         self.devices.append(self.garage_door.image)
 
         # Add the TV
-        # self.television = TV(pygame.image.load())
+        self.television = TV(pygame.image.load("Assets/Smart_Devices/Garage_Door.png"))
 
         # Add the camera
         self.garage_camera = Camera(None)
+
+        # Add the Tab
+        self.Tab = Tab(pygame.image.load("Assets/Buttons/g5.png"))
 
         # Add array for notifications
         self.notifications = []

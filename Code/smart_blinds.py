@@ -1,5 +1,5 @@
-from Code.notifications import Notification
-from Code.smart_device import Device
+from notifications import Notification
+from smart_device import Device
 
 
 class Blinds(Device):
