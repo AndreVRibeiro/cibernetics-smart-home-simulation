@@ -9,6 +9,7 @@ tv_2 = pygame.image.load('Assets/Smart_Devices/Livingroom_TV2.png')
 tv_3 = pygame.image.load('Assets/Smart_Devices/Livingroom_TV3.png')
 arr = [tv_1, tv_2, tv_3]
 
+
 class TV(Device):
     def __init__(self, image):
         super().__init__(image)
@@ -28,8 +29,8 @@ class TV(Device):
 
     def add_notification(self, name, place):
         if self.on:
-            text = "The " + name + " turned on in the " + place
+            text = "✅ The " + name + " turned on in the " + place
             return Notification(text, 3000)
         if not self.on:
-            text = "The " + name + " turned off in the " + place
+            text = "⛔ The " + name + " turned off in the " + place
             return Notification(text, 3000)
