@@ -1,5 +1,10 @@
+import pygame
+
 from notifications import Notification
 from smart_device import Device
+
+path = "Assets/Sounds/garage_door_closing.mp3"
+path2 = "Assets/Sounds/garage_door_opening.mp3"
 
 
 class Garage(Device):
@@ -13,8 +18,12 @@ class Garage(Device):
 
         if self.closed:
             smart_home.devices.append(self.image)
+            pygame.mixer.music.load(path)
+            pygame.mixer.music.play()
         else:
             smart_home.devices.remove(self.image)
+            pygame.mixer.music.load(path2)
+            pygame.mixer.music.play()
 
     def add_notification(self, name, place):
         if not self.closed:
