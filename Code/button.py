@@ -29,8 +29,10 @@ class Button:
     def perform_action(self):
         print(f"Button clicked: {self.name}")
 
-        if self.name == "Channel Up" or self.name == "Channel Down" or self.name == "Volume Up" or self.name == "Volume Down":
-            self.device.change_channel(self.name, self.smart_home)
+        if self.name == "Channel Up" or self.name == "Channel Down":
+            self.smart_home.notifications.append(self.device.change_channel(self.name, self.smart_home))
+        elif self.name == "Volume Up" or self.name == "Volume Down":
+            self.smart_home.notifications.append(self.device.change_volume(self.name, self.smart_home))
         elif self.device is not None:
             self.device.action(self.smart_home)
             self.smart_home.notifications.append(self.device.add_notification(self.name, self.place))
