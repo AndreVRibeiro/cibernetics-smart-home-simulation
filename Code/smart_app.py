@@ -23,7 +23,8 @@ class SmartApp:
             Button("Floor Lamp", "Living Room", self.smart_home.floor_lamp_livingroom, "Assets/Buttons/button_floorlamp.png", "Assets/Buttons/button_floorlamp_pressed.png", (1692.465, 384.858), smart_home),
             Button("Camera", "Garage", self.smart_home.garage_camera, "Assets/Buttons/button_camera.png", "Assets/Buttons/button_camera.png", (1549.301, 898.102), smart_home),
             Button("TV", "Living Room", self.smart_home.television, "Assets/Buttons/button_tv.png", "Assets/Buttons/button_tv_pressed.png", (1406.138, 385.289), smart_home),
-            Button("Automation", "None", None, "Assets/Buttons/g5.png", "Assets/Buttons/g5.png", (1694.977, 128.282), smart_home)
+            Button("Automation", "None", None, "Assets/Buttons/g5.png", "Assets/Buttons/g5.png", (1694.977, 128.282), smart_home),
+            Button("Door", "Entrance", self.smart_home.entrance_door, "Assets/Buttons/button_door.png", "Assets/Buttons/button_door_pressed.png", (1406.138, 256.477), smart_home)
             # Add more buttons as needed
         ]
         self.buttons_Camera = [

@@ -1,31 +1,36 @@
+import pygame
 from playsound import playsound
+
+from notifications import Notification
 from smart_device import Device
 
+path = "Assets/Sounds/dorm-door-opening-6038.mp3"
+path2 = "Assets/Sounds/door-1-close.mp3"
 # for playing note.wav file
-
-door_bell_sound = "Assets/Sounds/doorbell-shortened-100308.mp3"
-door_opened_sound = "Assets/Sounds/dorm-door-opening-6038.mp3"
-door_closed_sound = "Assets/Sounds/door-1-close.mp3"
-
-# add image
-door_opened_image = "    "
-
 
 class Door(Device):
     def __init__(self, image):
         self.image = image
-        self.image_closed = image
         self.opened = False
 
-    def ring(self, smart_home):
-        playsound(door_bell_sound)
 
-    def open(self, smart_home):
-        self.opened = True
-        self.image = door_opened_image
-        playsound(door_opened_sound)
+    def action(self, smart_home):
+        self.opened = not self.opened
 
-    def close(self, smart_home):
-        self.opened = False
-        self.image = self.image_closed
-        playsound(door_closed_sound)
+        if self.opened:
+            smart_home.devices.append(self.image)
+            pygame.mixer.music.load(path)
+            pygame.mixer.music.play()
+
+        else:
+            smart_home.devices.remove(self.image)
+            pygame.mixer.music.load(path2)
+            pygame.mixer.music.play()
+
+    def add_notification(self, name, place):
+        if self.opened:
+            text = "🔓 The Entrance Door opened"
+            return Notification(text, 3000)
+        if not self.opened:
+            text = "🔒 The Entrance Door closed"
+            return Notification(text, 3000)

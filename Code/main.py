@@ -6,6 +6,8 @@ from Code.smart_blinds import Blinds
 from smart_home import SmartHome
 
 pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.set_volume(0.5)
 
 # Set up display
 #screen = pygame.display.set_mode((1920, 1080))

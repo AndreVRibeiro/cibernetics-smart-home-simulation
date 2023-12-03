@@ -1,5 +1,6 @@
 import pygame.image
 
+from smart_door import Door
 from automation_tab import Tab
 from smart_tv import TV
 from smart_blinds import Blinds
@@ -30,6 +31,9 @@ class SmartHome:
         # Add the Garage Door
         self.garage_door = Garage(pygame.image.load("Assets/Smart_Devices/Garage_Door.png"))
         self.devices.append(self.garage_door.image)
+
+        # Add the entrance Door
+        self.entrance_door = Door(pygame.image.load("Assets/Smart_Devices/Entry_Door.png"))
 
         # Add the TV
         self.television = TV(pygame.image.load("Assets/Smart_Devices/Garage_Door.png"))
