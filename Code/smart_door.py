@@ -6,13 +6,14 @@ from smart_device import Device
 
 path = "Assets/Sounds/dorm-door-opening-6038.mp3"
 path2 = "Assets/Sounds/door-1-close.mp3"
+
+
 # for playing note.wav file
 
 class Door(Device):
     def __init__(self, image):
-        self.image = image
+        super().__init__(image)
         self.opened = False
-
 
     def action(self, smart_home):
         self.opened = not self.opened

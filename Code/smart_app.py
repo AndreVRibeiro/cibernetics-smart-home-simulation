@@ -7,9 +7,11 @@ class SmartApp:
 
     def __init__(self, smart_home):
         self.image = pygame.transform.scale(pygame.image.load("Assets/Phone.png"), (532, 1001))
-        self.image_Extra = pygame.transform.scale(pygame.image.load("Assets/Extra.png"), (479, 792))
+        self.image_Camera_Menu = pygame.transform.scale(pygame.image.load("Assets/Extra.png"), (479, 792))
+        self.image_TV_Menu = pygame.transform.scale(pygame.image.load("Assets/Menus/TV_Menu.png"), (479, 792))
         self.visible_Start = False
         self.visible_Camera = False
+        self.visible_TV = False
         self.smart_home = smart_home
         self.buttons_Start = [
             Button("Blinds", "Bedroom", self.smart_home.blinds_bedroom, "Assets/Buttons/button_blinds.png", "Assets/Buttons/button_blinds_pressed.png", (1406.138, 641.480), smart_home),
@@ -30,31 +32,55 @@ class SmartApp:
         self.buttons_Camera = [
             Button("Exit", None, None, "Assets/Buttons/button_exit.png", None, (1779.693, 246.525), smart_home)
         ]
+        self.buttons_TV = [
+            Button("Exit", None, None, "Assets/Buttons/button_exit.png", None, (1779.693, 246.525), smart_home),
+            Button("TV2", "Living Room", self.smart_home.television, "Assets/Buttons/button_tv2.png", "Assets/Buttons/button_tv2_pressed.png", (1548.959, 452.148), smart_home),
+            Button("Volume Up", None, self.smart_home.television, "Assets/Buttons/button_vol_up.png", None, (1457.203, 658.123), smart_home),
+            Button("Volume Down", None, self.smart_home.television, "Assets/Buttons/button_vol_down.png", None, (1457.201, 805.918), smart_home),
+            Button("Channel Up", None, self.smart_home.television, "Assets/Buttons/button_ch_up.png", None, (1656.235, 659.811), smart_home),
+            Button("Channel Down", None, self.smart_home.television, "Assets/Buttons/button_ch_down.png", None, (1656.234, 807.606), smart_home)
+        ]
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             self.visibility_start()
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left mouse button
-            # Home Menu is visible - Camera Menu is not
-            if self.visible_Start and not self.visible_Camera:
+
+            # Home Menu is visible - Camera Menu is not - TV Menu is not
+            if self.visible_Start and not self.visible_Camera and not self.visible_TV:
                 for button in self.buttons_Start:
                     if button.rect.collidepoint(event.pos):
                         if button.name == "Camera":
                             self.visibility_camera()
+                        elif button.name == "TV":
+                            self.visibility_tv()
                         else:
                             button.perform_action()
-            elif self.visible_Start and self.visible_Camera:
+            # Home Menu is visible - Camera Menu is visible - TV Menu is not
+            elif self.visible_Start and self.visible_Camera and not self.visible_TV:
                 for button in self.buttons_Camera:
                     if button.rect.collidepoint(event.pos):
                         if button.name == "Exit":
                             self.visibility_camera()
+            # Home Menu is visible - Camera Menu is not - TV Menu is visible
+            elif self.visible_Start and not self.visible_Camera and self.visible_TV:
+                for button in self.buttons_TV:
+                    if button.rect.collidepoint(event.pos):
+                        if button.name == "Exit":
+                            self.visibility_tv()
+                        else:
+                            button.perform_action()
 
     def draw(self, screen):
         if self.visible_Start:
             screen.blit(self.image, (1351, 42))  # Draw the image
             if self.visible_Camera:
-                screen.blit(self.image_Extra, (1377.386, 220.390))
+                screen.blit(self.image_Camera_Menu, (1377.386, 220.390))
                 for button in self.buttons_Camera:
+                    screen.blit(button.image, button.position)
+            elif self.visible_TV:
+                screen.blit(self.image_TV_Menu, (1377.386, 220.390))
+                for button in self.buttons_TV:
                     screen.blit(button.image, button.position)
             else:
                 for button in self.buttons_Start:
@@ -65,3 +91,6 @@ class SmartApp:
 
     def visibility_camera(self):
         self.visible_Camera = not self.visible_Camera
+
+    def visibility_tv(self):
+        self.visible_TV = not self.visible_TV
