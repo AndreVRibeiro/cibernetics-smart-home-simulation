@@ -1,5 +1,9 @@
+import pygame
+
 from notifications import Notification
 from smart_device import Device
+
+error = "Assets/Sounds/stop.mp3"
 
 
 class Thermostat(Device):
@@ -71,4 +75,7 @@ class Thermostat(Device):
                 text = "➕ The Temperature of the Kitchen was set to " + self.kitchen_temp_text
                 return Notification(text, 3000)
         text = "❌ Limit reached!"
+        pygame.mixer.music.load(error)
+        pygame.mixer.music.play()
         return Notification(text, 3000)
+
