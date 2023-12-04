@@ -19,6 +19,8 @@ class Button:
             self.image = pygame.transform.scale(pygame.image.load(image), (121, 86))
         elif self.name == "Minus Fridge" or self.name == "Minus Freezer" or self.name == "Plus Fridge" or self.name == "Plus Freezer":
             self.image = pygame.transform.scale(pygame.image.load(image), (47, 46))
+        elif self.name == "Minus Bathroom" or self.name == "Minus Livingroom" or self.name == "Plus Livingroom" or self.name == "Plus Bathroom" or self.name == "Minus Bedroom" or self.name == "Minus Kitchen" or self.name == "Plus Bedroom" or self.name == "Plus Kitchen":
+            self.image = pygame.transform.scale(pygame.image.load(image), (57, 56))
         else:
             self.image = pygame.transform.scale(pygame.image.load(image), (135.474, 70.853))
             self.image_pressed = pygame.transform.scale(pygame.image.load(image_pressed), (135.474, 70.853))
@@ -35,6 +37,9 @@ class Button:
         elif self.name == "Volume Up" or self.name == "Volume Down":
             self.smart_home.notifications.append(self.device.change_volume(self.name, self.smart_home))
         elif self.name == "Minus Fridge" or self.name == "Minus Freezer" or self.name == "Plus Fridge" or self.name == "Plus Freezer":
+            self.smart_home.notifications.append(self.device.change_temp(self.name))
+        elif self.name == "Minus Bathroom" or self.name == "Minus Livingroom" or self.name == "Plus Livingroom" or self.name == "Plus Bathroom" or self.name == "Minus Bedroom" or self.name == "Minus Kitchen" or self.name == "Plus Bedroom" or self.name == "Plus Kitchen":
+            print("Hello")
             self.smart_home.notifications.append(self.device.change_temp(self.name))
         elif self.device is not None:
             self.device.action(self.smart_home)

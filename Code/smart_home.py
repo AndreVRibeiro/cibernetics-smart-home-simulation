@@ -1,5 +1,6 @@
 import pygame.image
 
+from smart_thermostat import Thermostat
 from smart_fridge import Fridge
 from smart_door import Door
 from automation_tab import Tab
@@ -44,6 +45,9 @@ class SmartHome:
 
         # Add the fridge
         self.kitchen_fridge = Fridge(None)
+
+        # Add the thermostat
+        self.thermostat_bathroom = Thermostat(None)
 
         # Add the Tab
         self.Tab = Tab(pygame.image.load("Assets/Buttons/g5.png"))
