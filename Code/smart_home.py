@@ -1,5 +1,6 @@
 import pygame.image
 
+from smart_fridge import Fridge
 from smart_door import Door
 from automation_tab import Tab
 from smart_tv import TV
@@ -41,6 +42,9 @@ class SmartHome:
         # Add the camera
         self.garage_camera = Camera(None)
 
+        # Add the fridge
+        self.kitchen_fridge = Fridge(None)
+
         # Add the Tab
         self.Tab = Tab(pygame.image.load("Assets/Buttons/g5.png"))
 
@@ -72,7 +76,7 @@ class SmartHome:
             # Blit the background and text onto the screen
             screen.blit(text_surface, text_rect.topleft)
 
-            #screen.blit(text_surface, (200, y_position))
+            # screen.blit(text_surface, (200, y_position))
             y_position += text_surface.get_height() + 5
 
 
