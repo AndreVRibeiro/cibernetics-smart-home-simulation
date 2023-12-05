@@ -16,6 +16,9 @@ class Button:
         elif self.name == "Door2":
             self.image = pygame.transform.scale(pygame.image.load(image), (311, 162))
             self.image_pressed = pygame.transform.scale(pygame.image.load(image_pressed), (311, 162))
+        elif self.name == "Garage Door2":
+            self.image = pygame.transform.scale(pygame.image.load(image), (311, 162))
+            self.image_pressed = pygame.transform.scale(pygame.image.load(image_pressed), (311, 162))
         elif self.name == "Volume Up" or self.name == "Channel Up":
             self.image = pygame.transform.scale(pygame.image.load(image), (121, 84))
         elif self.name == "Volume Down" or self.name == "Channel Down":
@@ -59,4 +62,9 @@ class Button:
             if self.device.opened and not self.pressed:
                 self.pressed_image()
             elif not self.device.opened and self.pressed:
+                self.pressed_image()
+        elif self.name == "Garage Door1" or self.name == "Garage Door2":
+            if self.device.closed and self.pressed:
+                self.pressed_image()
+            elif not self.device.closed and not self.pressed:
                 self.pressed_image()

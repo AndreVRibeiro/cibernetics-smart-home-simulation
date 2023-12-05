@@ -8,7 +8,7 @@ class SmartApp:
 
     def __init__(self, smart_home):
         self.image = pygame.transform.scale(pygame.image.load("Assets/Phone.png"), (532, 1001))
-        self.image_Camera_Menu = pygame.transform.scale(pygame.image.load("Assets/Extra.png"), (479, 792))
+        self.image_Camera_Menu = pygame.transform.scale(pygame.image.load("Assets/Menus/Camera_Menu.png"), (479, 792))
         self.image_TV_Menu = pygame.transform.scale(pygame.image.load("Assets/Menus/TV_Menu.png"), (479, 792))
         self.image_Fridge_Menu = pygame.transform.scale(pygame.image.load("Assets/Menus/Fridge_Menu.png"), (479, 792))
         self.image_Thermostat_Menu = pygame.transform.scale(pygame.image.load("Assets/Menus/Thermostat_Menu.png"), (479, 792))
@@ -36,7 +36,7 @@ class SmartApp:
                    (1406.148, 513.239), smart_home),
             Button("Lights", "Bathroom", self.smart_home.lights_bathroom, "Assets/Buttons/button_sconces.png",
                    "Assets/Buttons/button_sconces_pressed.png", (1549.301, 769.791), smart_home),
-            Button("Door", "Garage", self.smart_home.garage_door, "Assets/Buttons/button_garage.png",
+            Button("Garage Door1", "Garage", self.smart_home.garage_door, "Assets/Buttons/button_garage.png",
                    "Assets/Buttons/button_garage_pressed.png", (1406.138, 898.102), smart_home),
             Button("Nightstand Lamp", "Bedroom", self.smart_home.nightstand_lamp_bedroom,
                    "Assets/Buttons/button_nightstand.png", "Assets/Buttons/button_nightstand_pressed.png",
@@ -61,7 +61,9 @@ class SmartApp:
             # Add more buttons as needed
         ]
         self.buttons_Camera = [
-            Button("Exit", None, None, "Assets/Buttons/button_exit.png", None, (1779.693, 246.525), smart_home)
+            Button("Exit", None, None, "Assets/Buttons/button_exit.png", None, (1779.693, 246.525), smart_home),
+            Button("Garage Door2", "Garage", self.smart_home.garage_door, "Assets/Buttons/button_garage2.png",
+                   "Assets/Buttons/button_garage_pressed2.png", (1461.809, 772.288), smart_home)
         ]
         self.buttons_TV = [
             Button("Exit", None, None, "Assets/Buttons/button_exit.png", None, (1779.693, 246.525), smart_home),
@@ -139,6 +141,8 @@ class SmartApp:
                     if button.rect.collidepoint(event.pos):
                         if button.name == "Exit":
                             self.visibility_camera()
+                        else:
+                            button.perform_action()
             # Home Menu is visible - Camera Menu is not - TV Menu is visible - Fridge Menu is not
             elif self.visible_Start and not self.visible_Camera and self.visible_TV and not self.visible_Fridge and not self.visible_Thermostat and not self.visible_Doorbell:
                 for button in self.buttons_TV:
@@ -175,7 +179,9 @@ class SmartApp:
             if self.visible_Camera:
                 screen.blit(self.image_Camera_Menu, (1377.386, 220.390))
                 for button in self.buttons_Camera:
+                    button.entry_door_check()
                     screen.blit(button.image, button.position)
+                self.draw_garage_camera(screen)
             elif self.visible_TV:
                 screen.blit(self.image_TV_Menu, (1377.386, 220.390))
                 for button in self.buttons_TV:
@@ -228,5 +234,25 @@ class SmartApp:
     def draw_doorbell_camera(self, screen):
 
         screen.blit(pygame.transform.scale(pygame.image.load(self.smart_home.doorbell_event), (410, 263)), (1411.859, 442.807))
+        screen.blit(pygame.transform.scale(pygame.image.load("Assets/Live.png"), (74, 30)), (1437.765, 456.057))
+
+    def draw_garage_camera(self, screen):
+        if self.smart_home.garage_event == "Assets/Backgrounds/Camera_Garage_Closed.png" or self.smart_home.garage_event == "Assets/Backgrounds/Camera_Garage_Open.png":
+            if self.smart_home.garage_door.closed:
+                self.smart_home.garage_event = "Assets/Backgrounds/Camera_Garage_Closed.png"
+            elif not self.smart_home.garage_door.closed:
+                self.smart_home.garage_event = "Assets/Backgrounds/Camera_Garage_Open.png"
+        elif self.smart_home.garage_event == "Assets/Backgrounds/Camera_Garage_Closed_Cat.png" or self.smart_home.garage_event == "Assets/Backgrounds/Camera_Garage_Open_Cat.png":
+            if self.smart_home.garage_door.closed:
+                self.smart_home.garage_event = "Assets/Backgrounds/Camera_Garage_Closed_Cat.png"
+            elif not self.smart_home.garage_door.closed:
+                self.smart_home.garage_event = "Assets/Backgrounds/Camera_Garage_Open_Cat.png"
+        else:
+            if self.smart_home.garage_door.closed:
+                self.smart_home.garage_event = "Assets/Backgrounds/Camera_Garage_Closed_Thief.png"
+            elif not self.smart_home.garage_door.closed:
+                self.smart_home.garage_event = "Assets/Backgrounds/Camera_Garage_Open_Thief.png"
+        screen.blit(pygame.transform.scale(pygame.image.load(self.smart_home.garage_event), (304, 263)), (1465.269, 433.696))
+
 
 

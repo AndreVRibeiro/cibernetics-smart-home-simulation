@@ -1,4 +1,4 @@
-from Code.smart_device import Device
+from smart_device import Device
 
 
 class Camera(Device):
