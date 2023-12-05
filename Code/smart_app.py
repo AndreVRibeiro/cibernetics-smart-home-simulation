@@ -253,6 +253,7 @@ class SmartApp:
             elif not self.smart_home.garage_door.closed:
                 self.smart_home.garage_event = "Assets/Backgrounds/Camera_Garage_Open_Thief.png"
         screen.blit(pygame.transform.scale(pygame.image.load(self.smart_home.garage_event), (304, 263)), (1465.269, 433.696))
+        screen.blit(pygame.transform.scale(pygame.image.load("Assets/Live.png"), (74, 30)), (1490.961, 446.945))
 
 
 
