@@ -1,3 +1,5 @@
+import pygame
+
 from notifications import Notification
 from smart_device import Device
 
@@ -19,8 +21,12 @@ class Blinds(Device):
     def add_notification(self, name, place):
         if not self.closed:
             text = "✅ The " + name + " opened in the " + place
+            pygame.mixer.music.load("Assets/Sounds/blinds_open.mp3")
+            pygame.mixer.music.play()
             return Notification(text, 3000)
         if self.closed:
             text = "⛔ The " + name + " closed in the " + place
+            pygame.mixer.music.load("Assets/Sounds/blinds_close.mp3")
+            pygame.mixer.music.play()
             return Notification(text, 3000)
 

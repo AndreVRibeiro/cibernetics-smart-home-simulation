@@ -1,5 +1,9 @@
+import random
+
 import pygame.image
 
+from Code.notifications import Notification
+from smart_doorbell import Doorbell
 from smart_thermostat import Thermostat
 from smart_fridge import Fridge
 from smart_door import Door
@@ -10,11 +14,49 @@ from smart_garage import Garage
 from smart_ligths import Light
 from smart_camera import Camera
 
+# Load background images
+morning_image = pygame.image.load("Assets/Backgrounds/PinkMorning.png")
+day_image = pygame.image.load("Assets/Backgrounds/BlueDay.png")
+noon_image = pygame.image.load("Assets/Backgrounds/OrangeSunset.png")
+night_image = pygame.image.load("Assets/Backgrounds/MarineblueNight.png")
+
+morning_event = ["Assets/Backgrounds/Camera_Morning_Normal.png",
+                 "Assets/Backgrounds/Camera_Morning_Cat.png"]
+day_event = ["Assets/Backgrounds/Camera_Day_Normal.png",
+             "Assets/Backgrounds/Camera_Day_Cat.png",
+             "Assets/Backgrounds/Camera_Day_Delivery.png"]
+noon_event = ["Assets/Backgrounds/Camera_Sunset_Normal.png",
+              "Assets/Backgrounds/Camera_Sunset_Delivery.png"]
+night_event = ["Assets/Backgrounds/Camera_Night_Normal.png",
+               "Assets/Backgrounds/Camera_Night_Thief.png"]
+
+
+# Define time intervals (in seconds) for each background
+morning_duration = 1
+day_duration = 1
+noon_duration = 1
+night_duration = 1
+
+total_cycle_duration = morning_duration + day_duration + noon_duration + night_duration
+
 
 class SmartHome:
 
     def __init__(self):
         self.devices = [pygame.image.load("Assets/HomeTest1.png")]
+
+        self.morning = False
+        self.day = False
+        self.noon = False
+        self.night = False
+        self.current_time_state = None
+
+        # Clock
+        self.clock = pygame.time.Clock()
+        self.current_time = 0
+        self.last_image_change_time = pygame.time.Clock()
+
+        self.doorbell_event = None
 
         # Add the Blinds to the Smart House
         self.blinds_bedroom = Blinds(pygame.image.load("Assets/Smart_Devices/Bedroom_Blinds.png"))
@@ -42,6 +84,9 @@ class SmartHome:
 
         # Add the camera
         self.garage_camera = Camera(None)
+
+        # Add the doorbell camera
+        self.entrance_doorbell = Doorbell(None)
 
         # Add the fridge
         self.kitchen_fridge = Fridge(None)
@@ -83,4 +128,50 @@ class SmartHome:
             # screen.blit(text_surface, (200, y_position))
             y_position += text_surface.get_height() + 5
 
+    def day_and_night_cycle(self, screen):
+        self.current_time = (self.current_time + self.clock.tick(60) / 1000) % total_cycle_duration  # Convert milliseconds to seconds
 
+        # Determine the current background based on the in-game time
+        if 0 <= self.current_time < morning_duration:
+            self.night = False
+            self.morning = True
+            new_time_state = "Morning"
+            current_background = morning_image
+        elif morning_duration <= self.current_time < morning_duration + day_duration:
+            self.morning = False
+            self.day = True
+            new_time_state = "Day"
+            current_background = day_image
+        elif morning_duration + day_duration <= self.current_time < morning_duration + day_duration + noon_duration:
+            self.day = False
+            self.noon = True
+            new_time_state = "Noon"
+            current_background = noon_image
+        else:
+            self.noon = False
+            self.night = True
+            new_time_state = "Night"
+            current_background = night_image
+
+        if new_time_state != self.current_time_state:
+            self.current_time_state = new_time_state
+            if self.current_time_state == "Morning":
+                self.doorbell_event = random.choice(morning_event)
+            elif self.current_time_state == "Day":
+                self.doorbell_event = random.choice(day_event)
+            elif self.current_time_state == "Noon":
+                self.doorbell_event = random.choice(noon_event)
+            elif self.current_time_state == "Night":
+                self.doorbell_event = random.choice(night_event)
+
+            if self.doorbell_event == "Assets/Backgrounds/Camera_Day_Delivery.png" or self.doorbell_event == "Assets/Backgrounds/Camera_Sunset_Delivery.png":
+                pygame.mixer.music.load("Assets/Sounds/doorbell.mp3")
+                pygame.mixer.music.play()
+                self.notifications.append(Notification("🔔 Doorbell alert! Check who's at the door", 6000))
+            elif self.doorbell_event == "Assets/Backgrounds/Camera_Morning_Cat.png" or self.doorbell_event == "Assets/Backgrounds/Camera_Day_Cat.png" or self.doorbell_event == "Assets/Backgrounds/Camera_Night_Thief.png":
+                pygame.mixer.music.load("Assets/Sounds/alert.mp3")
+                pygame.mixer.music.play()
+                self.notifications.append(
+                    Notification("⚠ Security Notification: Motion detected outside your door", 6000))
+
+        screen.blit(current_background, (0, 0))

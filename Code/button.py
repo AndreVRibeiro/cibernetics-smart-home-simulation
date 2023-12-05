@@ -13,6 +13,9 @@ class Button:
         elif self.name == "TV2":
             self.image = pygame.transform.scale(pygame.image.load(image), (136, 136))
             self.image_pressed = pygame.transform.scale(pygame.image.load(image_pressed), (136, 136))
+        elif self.name == "Door2":
+            self.image = pygame.transform.scale(pygame.image.load(image), (311, 162))
+            self.image_pressed = pygame.transform.scale(pygame.image.load(image_pressed), (311, 162))
         elif self.name == "Volume Up" or self.name == "Channel Up":
             self.image = pygame.transform.scale(pygame.image.load(image), (121, 84))
         elif self.name == "Volume Down" or self.name == "Channel Down":
@@ -39,7 +42,6 @@ class Button:
         elif self.name == "Minus Fridge" or self.name == "Minus Freezer" or self.name == "Plus Fridge" or self.name == "Plus Freezer":
             self.smart_home.notifications.append(self.device.change_temp(self.name))
         elif self.name == "Minus Bathroom" or self.name == "Minus Livingroom" or self.name == "Plus Livingroom" or self.name == "Plus Bathroom" or self.name == "Minus Bedroom" or self.name == "Minus Kitchen" or self.name == "Plus Bedroom" or self.name == "Plus Kitchen":
-            print("Hello")
             self.smart_home.notifications.append(self.device.change_temp(self.name))
         elif self.device is not None:
             self.device.action(self.smart_home)
@@ -51,3 +53,10 @@ class Button:
         save = self.image
         self.image = self.image_pressed
         self.image_pressed = save
+
+    def entry_door_check(self):
+        if self.name == "Door1" or self.name == "Door2":
+            if self.device.opened and not self.pressed:
+                self.pressed_image()
+            elif not self.device.opened and self.pressed:
+                self.pressed_image()
