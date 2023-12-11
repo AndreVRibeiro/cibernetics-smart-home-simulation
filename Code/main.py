@@ -53,6 +53,7 @@ while True:
     # menu_content.set_alpha(200)  # Set transparency (adjust as needed)
     smart_app.draw(screen)
     smart_home.update_notification_array()
+    smart_app.perform_time_automation()
     smart_home.draw_notifications(screen)
 
     # Update display

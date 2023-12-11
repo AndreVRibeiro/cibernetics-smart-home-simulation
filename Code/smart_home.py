@@ -2,12 +2,11 @@ import random
 
 import pygame.image
 
-from Code.notifications import Notification
+from notifications import Notification
 from smart_doorbell import Doorbell
 from smart_thermostat import Thermostat
 from smart_fridge import Fridge
 from smart_door import Door
-from automation_tab import Tab
 from smart_tv import TV
 from smart_blinds import Blinds
 from smart_garage import Garage
@@ -30,18 +29,14 @@ noon_event = ["Assets/Backgrounds/Camera_Sunset_Normal.png",
 night_event = ["Assets/Backgrounds/Camera_Night_Normal.png",
                "Assets/Backgrounds/Camera_Night_Thief.png"]
 garage_event_images = ["Assets/Backgrounds/Camera_Garage_Closed_Thief.png",
-                       "Assets/Backgrounds/Camera_Garage_Open_Thief.png",
                        "Assets/Backgrounds/Camera_Garage_Closed.png",
-                       "Assets/Backgrounds/Camera_Garage_Open.png",
-                       "Assets/Backgrounds/Camera_Garage_Closed_Cat.png",
                        "Assets/Backgrounds/Camera_Garage_Open_Cat.png"]
 
-
 # Define time intervals (in seconds) for each background
-morning_duration = 1
-day_duration = 1
-noon_duration = 1
-night_duration = 1
+morning_duration = 4
+day_duration = 4
+noon_duration = 4
+night_duration = 4
 
 total_cycle_duration = morning_duration + day_duration + noon_duration + night_duration
 
@@ -56,6 +51,8 @@ class SmartHome:
         self.noon = False
         self.night = False
         self.current_time_state = None
+        self.new_time_state = None
+        self.automation_done = False
 
         # Clock
         self.clock = pygame.time.Clock()
@@ -101,11 +98,20 @@ class SmartHome:
         # Add the thermostat
         self.thermostat_bathroom = Thermostat(None)
 
-        # Add the Tab
-        self.Tab = Tab(pygame.image.load("Assets/Buttons/g5.png"))
-
         # Add array for notifications
         self.notifications = []
+
+        self.automations_device = []
+        self.automations_time = []
+        self.automations_sensor = []
+
+        self.devices_list = [self.entrance_door, self.television, self.ceiling_lights_livingroom,
+                             self.floor_lamp_livingroom, self.ceiling_lights_kitchen, self.blinds_bedroom,
+                             self.ceiling_lights_bedroom, self.nightstand_lamp_bedroom, self.blinds_bathroom,
+                             self.lights_bathroom, self.garage_door]
+
+        self.visible_Start = False
+        self.visible_Automation = False
 
     def draw(self, screen):
         for image in self.devices:
@@ -116,7 +122,7 @@ class SmartHome:
 
     def draw_notifications(self, screen):
         # font = pygame.font.Font(pygame.font.match_font('Bahnschrift'), 50)
-        font = pygame.font.Font(pygame.font.match_font('Segoe UI Emoji'), 50)
+        font = pygame.font.Font(pygame.font.match_font('Segoe UI Emoji'), 40)
         y_position = 50
         background_color = (255, 255, 255)
         for notif in self.notifications:
@@ -136,40 +142,42 @@ class SmartHome:
             y_position += text_surface.get_height() + 5
 
     def day_and_night_cycle(self, screen):
-        self.current_time = (self.current_time + self.clock.tick(60) / 1000) % total_cycle_duration  # Convert milliseconds to seconds
+        self.current_time = (self.current_time + self.clock.tick(
+            60) / 1000) % total_cycle_duration  # Convert milliseconds to seconds
 
         # Determine the current background based on the in-game time
         if 0 <= self.current_time < morning_duration:
             self.night = False
             self.morning = True
-            new_time_state = "Morning"
+            self.new_time_state = "Morning"
             current_background = morning_image
         elif morning_duration <= self.current_time < morning_duration + day_duration:
             self.morning = False
             self.day = True
-            new_time_state = "Day"
+            self.new_time_state = "Day"
             current_background = day_image
         elif morning_duration + day_duration <= self.current_time < morning_duration + day_duration + noon_duration:
             self.day = False
             self.noon = True
-            new_time_state = "Noon"
+            self.new_time_state = "Noon"
             current_background = noon_image
         else:
             self.noon = False
             self.night = True
-            new_time_state = "Night"
+            self.new_time_state = "Night"
             current_background = night_image
 
-        if new_time_state != self.current_time_state:
-            self.current_time_state = new_time_state
+        if self.new_time_state != self.current_time_state:
+            self.automation_done = False
+            self.current_time_state = self.new_time_state
             if self.current_time_state == "Morning":
-                self.doorbell_event = random.choices(morning_event, weights=[5, 1])[0]
+                self.doorbell_event = random.choices(morning_event, weights=[8, 1])[0]
             elif self.current_time_state == "Day":
-                self.doorbell_event = random.choices(day_event, weights=[5, 1, 3])[0]
+                self.doorbell_event = random.choices(day_event, weights=[8, 1, 3])[0]
             elif self.current_time_state == "Noon":
-                self.doorbell_event = random.choices(noon_event, weights=[3, 2])[0]
+                self.doorbell_event = random.choices(noon_event, weights=[8, 2])[0]
             elif self.current_time_state == "Night":
-                self.doorbell_event = random.choices(night_event, weights=[5, 3])[0]
+                self.doorbell_event = random.choices(night_event, weights=[7, 1])[0]
 
             if self.doorbell_event == "Assets/Backgrounds/Camera_Day_Delivery.png" or self.doorbell_event == "Assets/Backgrounds/Camera_Sunset_Delivery.png":
                 self.draw_garage_camera()
@@ -183,11 +191,12 @@ class SmartHome:
                 self.notifications.append(
                     Notification("⚠ Security Notification: Motion detected outside your door", 6000))
             else:
-                self.garage_event = random.choices(garage_event_images, weights=[1, 1, 5, 5, 2, 2])[0]
+                self.garage_event = random.choices(garage_event_images, weights=[1, 8, 2])[0]
                 if self.garage_event == "Assets/Backgrounds/Camera_Garage_Closed_Cat.png" or self.garage_event == "Assets/Backgrounds/Camera_Garage_Open_Cat.png" or self.garage_event == "Assets/Backgrounds/Camera_Garage_Closed_Thief.png" or self.garage_event == "Assets/Backgrounds/Camera_Garage_Open_Thief.png":
                     pygame.mixer.music.load("Assets/Sounds/alert.mp3")
                     pygame.mixer.music.play()
-                    self.notifications.append(Notification("⚠ Security Notification: Motion detected outside your Garage", 6000))
+                    self.notifications.append(
+                        Notification("⚠ Security Notification: Motion detected outside your Garage", 6000))
         screen.blit(current_background, (0, 0))
 
     def draw_garage_camera(self):

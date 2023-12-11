@@ -32,3 +32,10 @@ class Garage(Device):
         if self.closed:
             text = "🔒 The Garage Door closed"
             return Notification(text, 3000)
+
+    def get_state(self):
+        if not self.closed:
+            state = "Active"
+        else:
+            state = "Inactive"
+        return state

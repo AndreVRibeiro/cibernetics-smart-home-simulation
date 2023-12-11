@@ -10,6 +10,18 @@ class Button:
         self.device = device
         if self.name == "Exit":
             self.image = pygame.transform.scale(pygame.image.load(image), (41, 41))
+        elif self.name == "Automation":
+            self.image = pygame.transform.scale(pygame.image.load(image), (83, 56))
+        elif self.name == "Time" or self.name == "Device" or self.name == "Sensor":
+            self.image = pygame.transform.scale(pygame.image.load(image), (429, 88))
+        elif self.name == "Cancel":
+            self.image = pygame.transform.scale(pygame.image.load(image), (110, 27))
+        elif self.name == "Back":
+            self.image = pygame.transform.scale(pygame.image.load(image), (80, 27))
+        elif self.name == "Done":
+            self.image = pygame.transform.scale(pygame.image.load(image), (81, 27))
+        elif self.name == "Next":
+            self.image = pygame.transform.scale(pygame.image.load(image), (72, 27))
         elif self.name == "TV2":
             self.image = pygame.transform.scale(pygame.image.load(image), (136, 136))
             self.image_pressed = pygame.transform.scale(pygame.image.load(image_pressed), (136, 136))

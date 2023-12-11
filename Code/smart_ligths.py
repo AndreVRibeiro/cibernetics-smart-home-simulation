@@ -32,3 +32,10 @@ class Light(Device):
         if not self.on:
             text = "⛔ The " + name + " turned off in the " + place
             return Notification(text, 3000)
+
+    def get_state(self):
+        if self.on:
+            state = "Active"
+        else:
+            state = "Inactive"
+        return state

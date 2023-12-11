@@ -35,3 +35,10 @@ class Door(Device):
         if not self.opened:
             text = "🔒 The Entrance Door closed"
             return Notification(text, 3000)
+
+    def get_state(self):
+        if self.opened:
+            state = "Active"
+        else:
+            state = "Inactive"
+        return state

@@ -93,3 +93,10 @@ class TV(Device):
                 self.sound.set_volume(self.volume - 0.1)
                 text = "➖ The Volume has been decreased"
                 return Notification(text, 3000)
+
+    def get_state(self):
+        if self.on:
+            state = "Active"
+        else:
+            state = "Inactive"
+        return state

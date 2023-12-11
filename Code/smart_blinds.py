@@ -30,3 +30,9 @@ class Blinds(Device):
             pygame.mixer.music.play()
             return Notification(text, 3000)
 
+    def get_state(self):
+        if not self.closed:
+            state = "Active"
+        else:
+            state = "Inactive"
+        return state
