@@ -108,6 +108,8 @@ class AutomationMenu:
                    smart_home),
             Button("Sensor", None, None, "Assets/Buttons/button_automation_sensor.png", None, (1402.341, 499.141),
                    smart_home),
+            Button("List", None, None, "Assets/Buttons/button_automation_list.png", None, (1402.341, 691.154),
+                   smart_home),
             Button("Cancel", None, None, "Assets/Buttons/button_cancel.png", None, (1418.908, 941.936), smart_home)
         ]
         self.buttons_back_next = [
@@ -142,6 +144,8 @@ class AutomationMenu:
                             self.visibility_automation_time()
                         elif button.name == "Sensor":
                             self.visibility_automation_sensor()
+                        elif button.name == "List":
+                            self.visibility_my_automations()
             # Device Automation Window 1
             elif self.smart_home.visible_Automation and not self.visible_Time_Automation and not self.visible_Time_Automation2 and not self.visible_Time_Automation3 and self.visible_Device_Automation \
                     and not self.visible_Device_Automation2 and not self.visible_Device_Automation3 and not self.visible_Device_Automation4 \

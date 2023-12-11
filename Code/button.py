@@ -12,7 +12,7 @@ class Button:
             self.image = pygame.transform.scale(pygame.image.load(image), (41, 41))
         elif self.name == "Automation":
             self.image = pygame.transform.scale(pygame.image.load(image), (83, 56))
-        elif self.name == "Time" or self.name == "Device" or self.name == "Sensor":
+        elif self.name == "Time" or self.name == "Device" or self.name == "Sensor" or self.name == "List":
             self.image = pygame.transform.scale(pygame.image.load(image), (429, 88))
         elif self.name == "Cancel":
             self.image = pygame.transform.scale(pygame.image.load(image), (110, 27))
