@@ -114,6 +114,11 @@ class SmartHome:
         self.visible_Automation = False
 
     def draw(self, screen):
+        font = pygame.font.Font(pygame.font.match_font('Bahnschrift'), 35)
+        text = font.render("Smart App [SPACE]", True, (0, 0, 0))
+        screen.blit(text, (1550, 76))
+        text = font.render("Quit [ESC]", True, (0, 0, 0))
+        screen.blit(text, (1550, 130))
         for image in self.devices:
             screen.blit(image, (0, 0))
 

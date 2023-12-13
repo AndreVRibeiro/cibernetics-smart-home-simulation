@@ -342,7 +342,7 @@ class SmartApp:
             self.automation_notification(automation)
 
     def automation_notification(self, automation):
-        self.smart_home.notifications.append(Notification("⚙ Automation: " + automation.when + "(" + automation.state1 + ") ➡ " + automation.do + "(" + automation.state1 + ")", 7000))
+        self.smart_home.notifications.append(Notification("⚙ Automation: " + automation.when + "(" + automation.state1 + ") ➡ " + automation.do + "(" + automation.state2 + ")", 7000))
 
     def automation_notification2(self, automation):
         self.smart_home.notifications.append(Notification("⚙ Automation: " + automation.when + " ➡ " + automation.do + "(" + automation.state + ")", 7000))
