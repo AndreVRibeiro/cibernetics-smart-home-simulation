@@ -107,7 +107,7 @@ My work focused on implementing and integrating the application's functionality.
 
 The presentation used for the project can be viewed here:
 
-[📑 View the project presentation](https://github.com/AndreVRibeiro/cibernetics-smart-home-simulation/edit/main/README.md#:~:text=Norbert-,Wiener%27s,-Cybernetics%20%2D%20Presentation.pdf)
+[📑 View the project presentation](https://github.com/AndreVRibeiro/cibernetics-smart-home-simulation/blob/main/Norbert%20Wiener's%20Cybernetics%20-%20Presentation.pdf)
 
 ## 👥 Project Context
 
