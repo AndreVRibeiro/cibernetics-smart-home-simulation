@@ -27,10 +27,10 @@ class Garage(Device):
 
     def add_notification(self, name, place):
         if not self.closed:
-            text = "🔓 The Garage Door opened"
+            text = "[OPEN] The Garage Door opened"
             return Notification(text, 3000)
         if self.closed:
-            text = "🔒 The Garage Door closed"
+            text = "[LOCK] The Garage Door closed"
             return Notification(text, 3000)
 
     def get_state(self):

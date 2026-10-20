@@ -44,10 +44,10 @@ class TV(Device):
 
     def add_notification(self, name, place):
         if self.on:
-            text = "✅ The TV turned on in the " + place
+            text = "[OK] The TV turned on in the " + place
             return Notification(text, 3000)
         if not self.on:
-            text = "⛔ The TV turned off in the " + place
+            text = "[X] The TV turned off in the " + place
             return Notification(text, 3000)
 
     def change_channel(self, name, smart_home):
@@ -79,19 +79,19 @@ class TV(Device):
                 self.sound = pygame.mixer.Sound(arrSound[self.channel])
                 self.sound.play()
 
-        text = "📺 The TV channel has been updated"
+        text = "[TV] The TV channel has been updated"
         return Notification(text, 3000)
 
     def change_volume(self, name, smart_home):
         if self.on:
             if name == "Volume Up":
                 self.sound.set_volume(self.volume + 0.1)
-                text = "➕ The Volume has been increased"
+                text = "[+] The Volume has been increased"
                 return Notification(text, 3000)
 
             elif name == "Volume Down":
                 self.sound.set_volume(self.volume - 0.1)
-                text = "➖ The Volume has been decreased"
+                text = "[-] The Volume has been decreased"
                 return Notification(text, 3000)
 
     def get_state(self):

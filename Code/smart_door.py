@@ -30,10 +30,10 @@ class Door(Device):
 
     def add_notification(self, name, place):
         if self.opened:
-            text = "🔓 The Entrance Door opened"
+            text = "[OPEN] The Entrance Door opened"
             return Notification(text, 3000)
         if not self.opened:
-            text = "🔒 The Entrance Door closed"
+            text = "[LOCK] The Entrance Door closed"
             return Notification(text, 3000)
 
     def get_state(self):

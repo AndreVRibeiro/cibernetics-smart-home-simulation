@@ -1,4 +1,5 @@
 import random
+import platform
 
 import pygame.image
 
@@ -33,10 +34,10 @@ garage_event_images = ["Assets/Backgrounds/Camera_Garage_Closed_Thief.png",
                        "Assets/Backgrounds/Camera_Garage_Open_Cat.png"]
 
 # Define time intervals (in seconds) for each background
-morning_duration = 4
-day_duration = 4
-noon_duration = 4
-night_duration = 4
+morning_duration = 2
+day_duration = 2
+noon_duration = 2
+night_duration = 2
 
 total_cycle_duration = morning_duration + day_duration + noon_duration + night_duration
 
@@ -127,6 +128,7 @@ class SmartHome:
 
     def draw_notifications(self, screen):
         # font = pygame.font.Font(pygame.font.match_font('Bahnschrift'), 50)
+        
         font = pygame.font.Font(pygame.font.match_font('Segoe UI Emoji'), 40)
         y_position = 50
         background_color = (255, 255, 255)
@@ -188,20 +190,20 @@ class SmartHome:
                 self.draw_garage_camera()
                 pygame.mixer.music.load("Assets/Sounds/doorbell.mp3")
                 pygame.mixer.music.play()
-                self.notifications.append(Notification("🔔 Doorbell alert! Check who's at the door", 6000))
+                self.notifications.append(Notification("[Ding-Dong!] Doorbell alert! Check who's at the door", 6000))
             elif self.doorbell_event == "Assets/Backgrounds/Camera_Morning_Cat.png" or self.doorbell_event == "Assets/Backgrounds/Camera_Day_Cat.png" or self.doorbell_event == "Assets/Backgrounds/Camera_Night_Thief.png":
                 self.draw_garage_camera()
                 pygame.mixer.music.load("Assets/Sounds/alert.mp3")
                 pygame.mixer.music.play()
                 self.notifications.append(
-                    Notification("⚠ Security Notification: Motion detected outside your door", 6000))
+                    Notification("[!] Security Notification: Motion detected outside your door", 6000))
             else:
                 self.garage_event = random.choices(garage_event_images, weights=[1, 8, 2])[0]
                 if self.garage_event == "Assets/Backgrounds/Camera_Garage_Closed_Cat.png" or self.garage_event == "Assets/Backgrounds/Camera_Garage_Open_Cat.png" or self.garage_event == "Assets/Backgrounds/Camera_Garage_Closed_Thief.png" or self.garage_event == "Assets/Backgrounds/Camera_Garage_Open_Thief.png":
                     pygame.mixer.music.load("Assets/Sounds/alert.mp3")
                     pygame.mixer.music.play()
                     self.notifications.append(
-                        Notification("⚠ Security Notification: Motion detected outside your Garage", 6000))
+                        Notification("[!] Security Notification: Motion detected outside your Garage", 6000))
         screen.blit(current_background, (0, 0))
 
     def draw_garage_camera(self):

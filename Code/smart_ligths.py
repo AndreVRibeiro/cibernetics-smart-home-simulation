@@ -27,10 +27,10 @@ class Light(Device):
 
     def add_notification(self, name, place):
         if self.on:
-            text = "✅ The " + name + " turned on in the " + place
+            text = "[OK] The " + name + " turned on in the " + place
             return Notification(text, 3000)
         if not self.on:
-            text = "⛔ The " + name + " turned off in the " + place
+            text = "[X] The " + name + " turned off in the " + place
             return Notification(text, 3000)
 
     def get_state(self):
