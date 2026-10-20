@@ -1,6 +1,6 @@
 import pygame
 
-from Code.notifications import Notification
+from notifications import Notification
 
 
 class Button:

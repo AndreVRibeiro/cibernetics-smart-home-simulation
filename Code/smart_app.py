@@ -1,6 +1,6 @@
 import pygame
 
-from Code.notifications import Notification
+from notifications import Notification
 from automation_menu import AutomationMenu
 from button import Button
 
